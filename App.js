@@ -60,10 +60,7 @@ export default class App extends Component {
               <View style={{ alignSelf: 'center' }} key={index}>
                 <View style={{ flexDirection: 'row' }} >
                   {val.active ?
-                    <FadeInView duration={3000}>
-                      < View style={styles.circleActive}><Text>{val.id}</Text>
-                      </View>
-                    </FadeInView>
+                    <FadeInView vala={val} circle={true} />
                     :
                     <View style={styles.circle}><Text>{val.id}</Text>
                     </View>
@@ -72,10 +69,7 @@ export default class App extends Component {
                     <View style={{ justifyContent: "center", marginLeft: -2, marginRight: -2 }}>
                       {/* <FadeInView> */}
                       {val.active ?
-                        <FadeInView duration={3000}>
-                          <View style={styles.activeLine}>
-                          </View>
-                        </FadeInView>
+                        <FadeInView line={true} />
                         :
                         <View style={styles.line}></View>}
                     </View>
@@ -91,9 +85,7 @@ export default class App extends Component {
               <View key={index}>
 
                 <View style={{ margin: 15, marginLeft: 20, width: '80%', height: 200, alignSelf: 'center' }}>
-                  <FadeInView duration={2000}>
-                    {this.renderIem(val, index)}
-                  </FadeInView>
+                  {this.renderIem(val, index)}
                 </View>
                 {val.id < 4 ?
                   <TouchableOpacity onPress={() => this.handleNext(val, index)}>
