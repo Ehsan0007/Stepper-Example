@@ -7,13 +7,15 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Platform, StyleSheet, Text, View, TouchableOpacity, Animated } from 'react-native';
 import { UploadPIc, GeneralInfo, VehicleInfo, AadditionalInfo } from './component'
+import FadeInView from './component/FadeIn';
 
-export default class App extends Component<> {
+export default class App extends Component {
   constructor() {
     super();
     this.state = {
+      fadeAnim: new Animated.Value(1), // init opacity 0
       data: [
         { id: 1, active: true, title: "uploadPIc" },
         { id: 2, active: false, title: "generalInfo" },
@@ -39,6 +41,11 @@ export default class App extends Component<> {
     }
   }
   handleNext = (val, index) => {
+    Animated.timing(
+      // Uses easing functions
+      this.state.fadeAnim, // The value to drive
+      { toValue: 0.5 } // Configuration
+    ).start(); // Don't forget start!
     let { data } = this.state;
     this.setState({ active: this.state.active + 1 })
     data[index].active = this.state.data[index + 1].active = true
@@ -52,10 +59,15 @@ export default class App extends Component<> {
             return (
               <View style={{ alignSelf: 'center' }} key={index}>
                 <View style={{ flexDirection: 'row' }} >
-                  <View style={val.active ? styles.circleActive : styles.circle}><Text>{val.id}</Text></View>
+                  <FadeInView>
+                    <View style={val.active ? styles.circleActive : styles.circle}><Text>{val.id}</Text>
+                    </View>
+                  </FadeInView>
                   {val.id < 4 ?
                     <View style={{ justifyContent: "center", marginLeft: -2, marginRight: -2 }}>
-                      <View style={val.active ? styles.activeLine : styles.line}></View>
+                      <FadeInView>
+                        <View style={val.active ? styles.activeLine : styles.line}></View>
+                      </FadeInView>
                     </View>
                     : null}
                 </View>
@@ -67,8 +79,11 @@ export default class App extends Component<> {
           if (val.id == this.state.active) {
             return (
               <View key={index}>
-                <View style={{ margin: 15, marginLeft: 20 }}>
-                  {this.renderIem(val, index)}
+
+                <View style={{ margin: 15, marginLeft: 20, width: '80%', height: 200, alignSelf: 'center' }}>
+                  <FadeInView>
+                    {this.renderIem(val, index)}
+                  </FadeInView>
                 </View>
                 {val.id < 4 ?
                   <TouchableOpacity onPress={() => this.handleNext(val, index)}>
