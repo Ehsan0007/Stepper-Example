@@ -59,15 +59,25 @@ export default class App extends Component {
             return (
               <View style={{ alignSelf: 'center' }} key={index}>
                 <View style={{ flexDirection: 'row' }} >
-                  <FadeInView>
-                    <View style={val.active ? styles.circleActive : styles.circle}><Text>{val.id}</Text>
+                  {val.active ?
+                    <FadeInView duration={3000}>
+                      < View style={styles.circleActive}><Text>{val.id}</Text>
+                      </View>
+                    </FadeInView>
+                    :
+                    <View style={styles.circle}><Text>{val.id}</Text>
                     </View>
-                  </FadeInView>
+                  }
                   {val.id < 4 ?
                     <View style={{ justifyContent: "center", marginLeft: -2, marginRight: -2 }}>
-                      <FadeInView>
-                        <View style={val.active ? styles.activeLine : styles.line}></View>
-                      </FadeInView>
+                      {/* <FadeInView> */}
+                      {val.active ?
+                        <FadeInView duration={3000}>
+                          <View style={styles.activeLine}>
+                          </View>
+                        </FadeInView>
+                        :
+                        <View style={styles.line}></View>}
                     </View>
                     : null}
                 </View>
@@ -81,7 +91,7 @@ export default class App extends Component {
               <View key={index}>
 
                 <View style={{ margin: 15, marginLeft: 20, width: '80%', height: 200, alignSelf: 'center' }}>
-                  <FadeInView>
+                  <FadeInView duration={2000}>
                     {this.renderIem(val, index)}
                   </FadeInView>
                 </View>
