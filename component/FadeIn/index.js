@@ -1,33 +1,48 @@
 import React from 'react';
-import { Animated, Text, View } from 'react-native';
+import { Animated, Text, View, StyleSheet } from 'react-native';
 
 export default class FadeInView extends React.Component {
     state = {
+        visible: false,
+        x: new Animated.Value(-50),
         fadeAnim: new Animated.Value(0),  // Initial value for opacity: 0
     }
 
     componentDidMount() {
-        Animated.timing(                  // Animate over time
-            this.state.fadeAnim,            // The animated value to drive
-            {
-                toValue: 1,                   // Animate to opacity: 1 (opaque)
-                duration: this.props.duration,              // Make it take a while
-            }
-        ).start();                        // Starts the animation
+        this.slide();                  // Starts the animation
     }
+    slide = () => {
+        Animated.spring(this.state.x, {
+            toValue: 0,
+        }).start();
+        this.setState({
+            visible: true,
+        });
+    };
 
     render() {
         let { fadeAnim } = this.state;
 
         return (
-            <Animated.View                 // Special animatable View
-                style={{
-                    ...this.props.style,
-                    opacity: fadeAnim,         // Bind opacity to animated value
-                }}
+            <Animated.View
+                style={[styles.slideView, {
+                    transform: [
+                        {
+                            translateX: this.state.x
+                        }
+                    ]
+                }]}
             >
                 {this.props.children}
+                {/* your content, such as this.props.children */}
             </Animated.View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    slideView: {
+        backgroundColor: '#F5FCFF',
+    }
+});
+
