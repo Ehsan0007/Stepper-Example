@@ -100,7 +100,8 @@ android {
     defaultConfig {
         applicationId "com.mymodule"
         minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        vectorDrawables.useSupportLibrary = true
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         ndk {
@@ -137,6 +138,8 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-image-crop-picker')
+    compile project(':react-native-image-picker')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     compile "com.facebook.react:react-native:+"  // From node_modules

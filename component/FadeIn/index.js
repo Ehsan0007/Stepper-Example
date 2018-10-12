@@ -27,7 +27,7 @@ export default class FadeInView extends React.Component {
         }
         return (
             <Animated.View style={[this.props.circle ? styles.box : styles.activeLine, animatedStyle]} >
-                {this.props.circle ? <Text style={{color : '#000000'}}>{this.props.vala.id}</Text> : <Text></Text>}
+                {this.props.circle ? <Text style={{ color: '#000000' }}>{this.props.vala.id}</Text> : <Text></Text>}
             </Animated.View>
 
         );
@@ -39,18 +39,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     },
     box: {
-        width: 24,
-        height: 24,
+        width: 28,
+        height: 28,
         borderWidth: 1,
         borderColor: 'transparent',
-        borderRadius: 12,
+        borderRadius: 14,
         backgroundColor: "#f8c000",
         justifyContent: 'center',
         alignItems: 'center',
     },
     activeLine: {
-        width: 40,
-        height: 4,
+        width: 45,
+        height: 6,
         backgroundColor: '#f8c000',
         // justifyContent: 'center',
         alignContent: 'center',

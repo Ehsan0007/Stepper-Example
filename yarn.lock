@@ -4296,6 +4296,18 @@ react-is@^16.4.1:
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.4.2.tgz#84891b56c2b6d9efdee577cc83501dfc5ecead88"
 
+react-native-dimension@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-dimension/-/react-native-dimension-1.0.6.tgz#049e40746160137f5e1dde89983b04ff8dc288d5"
+
+react-native-image-crop-picker@^0.21.2:
+  version "0.21.2"
+  resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.21.2.tgz#f0e7ad4615f1f7c79ba25e2e7708042e306d258e"
+
+react-native-image-picker@^0.27.1:
+  version "0.27.1"
+  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.27.1.tgz#32877c667e8c2713466fe178a6c7dd648e6cb5d3"
+
 react-native@0.55.0:
   version "0.55.0"
   resolved "http://registry.npmjs.org/react-native/-/react-native-0.55.0.tgz#cf17e01e6ff86187c47858e6c0b5ec6a15895361"

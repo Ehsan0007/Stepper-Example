@@ -11,7 +11,8 @@ import { Platform, StyleSheet, Text, View, TouchableOpacity, Animated } from 're
 import { UploadPIc, GeneralInfo, VehicleInfo, AadditionalInfo } from './component'
 import FadeInView from './component/FadeIn';
 import FadeOutView from './component/FadeOut';
-
+import Upload from "./component/Upload";
+import HeaderComponent from './component/Upload/Header'
 
 export default class App extends Component {
   constructor() {
@@ -31,7 +32,7 @@ export default class App extends Component {
   renderIem = (val, i) => {
     switch (val.title) {
       case 'uploadPIc':
-        return <UploadPIc />
+        return <Upload />
       case 'generalInfo':
         return <GeneralInfo />
       case 'vehicleInfo':
@@ -50,7 +51,13 @@ export default class App extends Component {
   render() {
     return (
       <View>
-        <View style={{ width: '80%', alignSelf: 'center', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
+        <HeaderComponent
+          {...this.props}
+          headerText="Vehicles List"
+          icon={require('./component/back_arrow.png')}
+          back={() => alert(23432)}
+        />
+        <View style={{ width: '66%', alignSelf: 'center', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
           {this.state.data.map((val, index) => {
             return (
               <View style={{ alignSelf: 'center' }} key={index}>
@@ -58,7 +65,7 @@ export default class App extends Component {
                   {val.active ?
                     <FadeInView vala={val} circle={true} />
                     :
-                    <View style={styles.circle}><Text style={{color : '#000000'}}>{val.id}</Text>
+                    <View style={styles.circle}><Text style={{ color: '#000000' }}>{val.id}</Text>
                     </View>
                   }
                   {val.id < 4 ?
@@ -79,17 +86,24 @@ export default class App extends Component {
             return (
               <View key={index}>
                 <FadeOutView duration={2000}>
-                  <View style={{ margin: 15, marginLeft: 20, width: '80%', height: 200, alignSelf: 'center' }}>
+                  {/* <View style={{ width: '100%', flexDirection: 'row' }}>
+                    <View style={{ width: '34%' }}>
+                      <Text>Line</Text>
+                    </View>
+                  </View> */}
+
+                  <View style={{ width: '100%', marginTop: 20 }}>
                     {this.renderIem(val, index)}
                   </View>
                 </FadeOutView>
-                {val.id < 4 ?
-                  <TouchableOpacity onPress={() => this.handleNext(val, index)}>
-                    <View style={styles.touch}><Text>Next</Text></View>
-                  </TouchableOpacity>
-                  : <TouchableOpacity onPress={() => alert("Suceess")}>
-                    <View style={styles.touch}><Text>Submit</Text></View>
-                  </TouchableOpacity>
+                {
+                  val.id < 4 ?
+                    <TouchableOpacity onPress={() => this.handleNext(val, index)}>
+                      <View style={styles.touch}><Text>Next</Text></View>
+                    </TouchableOpacity>
+                    : <TouchableOpacity onPress={() => alert("Suceess")}>
+                      <View style={styles.touch}><Text>Submit</Text></View>
+                    </TouchableOpacity>
                 }
               </View>
             )
@@ -108,11 +122,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   circle: {
-    width: 24,
-    height: 24,
+    width: 28,
+    height: 28,
     borderWidth: 1,
     borderColor: 'transparent',
-    borderRadius: 12,
+    borderRadius: 14,
     backgroundColor: "#CCCCCC",
     justifyContent: 'center',
     alignItems: 'center',
@@ -128,8 +142,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   line: {
-    width: 40,
-    height: 4,
+    width: 45,
+    height: 6,
     backgroundColor: '#CCCCCC',
     // justifyContent: 'center',
     alignContent: 'center',
@@ -146,12 +160,25 @@ const styles = StyleSheet.create({
   touch: {
     backgroundColor: "#f8c000",
     padding: 10,
+    paddingLeft: 50,
+    paddingRight: 50,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: 'transparent',
-    borderRadius: 5,
-    marginTop: 150
+    borderRadius: 20,
+    // position: 'absolute',
+    // bottom: 0
+    // marginTop: 150
+  },
+  button: {
+    backgroundColor: 'blue',
+    marginBottom: 10
+  },
+  text: {
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'center'
   }
 });
